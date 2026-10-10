@@ -111,8 +111,8 @@ class ventana_modo_triangular:
         self.raiz.config(bg="sky blue") # defino el color celeste como fondo de pantalla
 
         self.texto_triangular = tk.Label(self.raiz, text = "MODO TRIANGULAR",  font=("Arial 18"), fg="black", bg="sky blue")
-        self.texto_de_x.pack(pady = 50)  #tamaño del texto
-        self.texto_de_x.place(x=150 , y=100) # ubico el tamaño del texto
+        self.texto_triangular(pady = 50)  #tamaño del texto
+        self.texto_triangular(x=150 , y=100) # ubico el tamaño del texto
 
         self.texto_de_x = tk.Label(self.raiz, text= "Ingrese el valor de la hipotenusa", font=("Arial 18"), fg="black", bg="sky blue")
         self.texto_de_x.pack(pady = 50)  #tamaño del texto
@@ -124,8 +124,6 @@ class ventana_modo_triangular:
 
 
         
-
-              
 ventana_principal()
 
 
