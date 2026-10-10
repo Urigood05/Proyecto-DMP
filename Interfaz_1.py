@@ -1,4 +1,5 @@
 import tkinter as tk #libreria de la interfaz
+from tkinter import messagebox
 class ventana_principal:
     def __init__(self):
        
@@ -39,16 +40,41 @@ class ventana_modo_coordenadas:
         self.raiz.geometry("1400x850")   #tamaño de la ventana
         self.raiz.config(bg="sky blue") # defino el color celeste como fondo de pantalla
 
-        self.texto_principal = tk.Label(self.raiz, text="MODO COORDENADAS", font=("Arial 24"), fg="black", bg="sky blue",) #añado un texto principal
-        self.texto_principal.pack(pady=50) #modifico el tamaño del texto
+        self.texto_principal = tk.Label(self.raiz, text="MODO COORDENADAS", font=("Arial 36"), fg="black", bg="sky blue",) #añado un texto principal
+        self.texto_principal.pack(pady=70) #modifico el tamaño del texto
         self.texto_principal.place(x=100 , y=100) # ubico el tamaño del texto
 
         self.texto_de_x = tk.Label(self.raiz, text= "Ingrese el valor de x en milimetros \n (Maximo 300 milimetros)", font=("Arial 18"), fg="black", bg="sky blue")
-        self.texto_de_x.pack(pady = 50)
-        self.texto_de_x.place(x=400 , y=250) # ubico el tamaño del texto
-        self.raiz.mainloop()
+        self.texto_de_x.pack(pady = 50)  #tamaño del texto
+        self.texto_de_x.place(x=100 , y=200) # ubico el tamaño del texto
 
+        self.validar_comando = self.raiz.register(self.solo_numeros)
 
+        self.ingresar_coordenadas = tk.Entry(self.raiz, font=("Arial 18"),validate= "key", validatecommand=(self.validar_comando, '%P') )
+        self.ingresar_coordenadas.pack()
+        self.ingresar_coordenadas.place(x = 150 , y = 270)
+
+        self.texto_de_y = tk.Label(self.raiz, text= "Ingrese el valor de y en milimetros", font=("Arial 18"), fg="black", bg="sky blue") # se crea el cuadro de texto de y
+        self.texto_de_y.pack(pady = 50) 
+        self.texto_de_y.place(x = 100 , y = 320 )
+
+    def solo_numeros(self, texto_nuevo):
+        if texto_nuevo == "":  # si despues de que el usuario cometetiera el error le permitimos que corriga el error
+            return True
+        
+        if texto_nuevo.isdigit():  # aqui se revisa si lo que se escribio fueron numeros
+            
+            valor = int(texto_nuevo) #se convierte el texto a un numero entero para que se compare
+            
+            if valor > 300: # se verifica si se pada el limite
+                # se muestra la ventana de advertencia
+                messagebox.showwarning("Valor inválido", "Los caracteres numericos que se ingresaron no son validos, por favor ingrese de nuevo los caracteres numericos")
+                return False # Rechazamos el ingreso de ese número
+            
+            return True # Si es un número y es <= 300, lo permitimos
+        
+        return False   # Si el usuario intentó escribir letras o símbolos, lo rechazamos
+        
 ventana_principal()
 
 
