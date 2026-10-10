@@ -8,7 +8,7 @@ class ventana_principal:
         self.raiz.geometry("1400x850")   #tamaño de la ventana
         self.raiz.config(bg="sky blue") # defino el color celeste como fondo de pantalla
 
-        self.texto_principal = tk.Label(self.raiz, text="ELIGE EL MODO DE ENTRADA", font=("Arial 24"), fg="black", bg="sky blue",) #añado un texto principal
+        self.texto_principal = tk.Label(self.raiz, text="ELIGE EL MODO DE ENTRADA", font=("Arial 24"), fg="black", bg="sky blue") #añado un texto principal
         self.texto_principal.pack(pady=50) #modifico el tamaño del texto
         self.texto_principal.place(x=500 , y=250) # ubico el tamaño del texto
 
@@ -26,14 +26,14 @@ class ventana_principal:
 
         self.raiz.mainloop() 
 
-    def abrir_coordenadas(self):
-        ventana_coordenadas = tk.Toplevel(self.raiz)  
-        ventana_modo_coordenadas(ventana_coordenadas)
+    def abrir_coordenadas(self):     #creo la funcion
+        ventana_coordenadas = tk.Toplevel(self.raiz)  # esta linea del codigo sirve para poder abrir otra ventana 
+        ventana_modo_coordenadas(ventana_coordenadas)  # se ejecuta la instruccion
 
 class ventana_modo_coordenadas:
     def __init__(self, ventana_coordenadas):
        
-        self.raiz = ventana_coordenadas
+        self.raiz = ventana_coordenadas     # se crea la ventana del modo coordenadas
         self.raiz.title("modo coordenadas")   #se le pone el nombre a la ventana
         self.raiz.resizable(False,False)  #se bloquea el ajuste de la ventana
         self.raiz.geometry("1400x850")   #tamaño de la ventana
@@ -43,6 +43,9 @@ class ventana_modo_coordenadas:
         self.texto_principal.pack(pady=50) #modifico el tamaño del texto
         self.texto_principal.place(x=100 , y=100) # ubico el tamaño del texto
 
+        self.texto_de_x = tk.Label(self.raiz, text= "Ingrese el valor de x en milimetros \n (Maximo 300 milimetros)", font=("Arial 18"), fg="black", bg="sky blue")
+        self.texto_de_x.pack(pady = 50)
+        self.texto_de_x.place(x=400 , y=250) # ubico el tamaño del texto
         self.raiz.mainloop()
 
 
