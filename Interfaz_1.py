@@ -34,7 +34,7 @@ class ventana_principal:
 
     def abrir_triangular(self):
         ventana_triangular = tk.Toplevel(self.raiz)
-        ventana_modo_triangular(ventana_triangular, self.raiz)
+        ventana_modo_triangular(ventana_triangular)
 
 class ventana_modo_coordenadas:
     def __init__(self, ventana_coordenadas, ventana_origen):
@@ -110,9 +110,17 @@ class ventana_modo_triangular:
         self.raiz.geometry("1400x850")   #tamaño de la ventana
         self.raiz.config(bg="sky blue") # defino el color celeste como fondo de pantalla
 
+        self.texto_triangular = tk.Label(self.raiz, text = "MODO TRIANGULAR",  font=("Arial 18"), fg="black", bg="sky blue")
+        self.texto_de_x.pack(pady = 50)  #tamaño del texto
+        self.texto_de_x.place(x=150 , y=100) # ubico el tamaño del texto
+
         self.texto_de_x = tk.Label(self.raiz, text= "Ingrese el valor de la hipotenusa", font=("Arial 18"), fg="black", bg="sky blue")
         self.texto_de_x.pack(pady = 50)  #tamaño del texto
-        self.texto_de_x.place(x=150 , y=200) # ubico el tamaño del texto
+        self.texto_de_x.place(x=150 , y=230) # ubico el tamaño del texto
+
+        self.ingresar_valor_hipotenusa = tk.Entry(self.raiz, font=("Arial 16"))
+        self.ingresar_coordenadasy.pack()
+        self.ingresar_coordenadasy.place(x = 150 , y = 370)
 
 
         
