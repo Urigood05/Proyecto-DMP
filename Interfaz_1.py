@@ -132,7 +132,15 @@ class ventana_modo_triangular:
 
         self.texto_del_desplazamientox =tk.Label(self.raiz, text = "El desplazamiento en el eje x sera",  font = ("Arial 18"), fg="black", bg="sky blue")
         self.texto_del_desplazamientox.pack()
-        self.texto_del_desplazamientox.place(x = 600 , y = 140)
+        self.texto_del_desplazamientox.place(x = 800 , y = 140)
+
+        self.desplazamiento = tk.Entry(self.raiz, font = ("Arial 18"))
+        self.desplazamiento.pack()
+        self.desplazamiento.place(x = 840 , y = 190)
+
+        self.texto_desplazamientoy = tk.Label(self.raiz, text ="El desplazamiento en el eje y sera", font= ("Arial 18"), fg="black", bg="sky blue")
+        self.texto_desplazamientoy.pack()
+        self.texto_desplazamientoy.place(x = 800, y = 240)
 
 
 
