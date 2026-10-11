@@ -110,17 +110,30 @@ class ventana_modo_triangular:
         self.raiz.geometry("1400x850")   #tamaño de la ventana
         self.raiz.config(bg="sky blue") # defino el color celeste como fondo de pantalla
 
-        self.texto_triangular = tk.Label(self.raiz, text = "MODO TRIANGULAR",  font=("Arial 18"), fg="black", bg="sky blue")
-        self.texto_triangular(pady = 50)  #tamaño del texto
-        self.texto_triangular(x=150 , y=100) # ubico el tamaño del texto
+        self.texto_triangular = tk.Label(self.raiz, text = "MODO TRIANGULAR",  font=("Arial 24"), fg="black", bg="sky blue")
+        self.texto_triangular.pack(pady = 50)  #tamaño del texto
+        self.texto_triangular.place(x=450 , y=50) # ubico el tamaño del texto
 
-        self.texto_de_x = tk.Label(self.raiz, text= "Ingrese el valor de la hipotenusa", font=("Arial 18"), fg="black", bg="sky blue")
-        self.texto_de_x.pack(pady = 50)  #tamaño del texto
-        self.texto_de_x.place(x=150 , y=230) # ubico el tamaño del texto
+        self.texto__hipotenusa = tk.Label(self.raiz, text= "Ingrese el valor de la hipotenusa", font=("Arial 18"), fg="black", bg="sky blue")
+        self.texto__hipotenusa.pack(pady = 50)  #tamaño del texto
+        self.texto__hipotenusa.place(x=300 , y=140) # ubico el tamaño del texto
 
         self.ingresar_valor_hipotenusa = tk.Entry(self.raiz, font=("Arial 16"))
-        self.ingresar_coordenadasy.pack()
-        self.ingresar_coordenadasy.place(x = 150 , y = 370)
+        self.ingresar_valor_hipotenusa.pack()
+        self.ingresar_valor_hipotenusa.place(x = 350 , y = 190)
+
+        self.ingresar_angulo = tk.Label(self.raiz, text= "Ingresa el valor del angulo", font = ("Arial 18"), fg="black", bg="sky blue")
+        self.ingresar_angulo.pack(pady = 50)
+        self.ingresar_angulo.place( x= 320 , y = 250)
+
+        self.ingresar_texto_angulo = tk.Entry(self.raiz, font = ("Arial 16"))
+        self.ingresar_texto_angulo.pack()
+        self.ingresar_texto_angulo.place(x = 350 , y = 300)
+
+        self.texto_del_desplazamientox =tk.Label(self.raiz, text = "El desplazamiento en el eje x sera",  font = ("Arial 18"), fg="black", bg="sky blue")
+        self.texto_del_desplazamientox.pack()
+        self.texto_del_desplazamientox.place(x = 600 , y = 140)
+
 
 
         
