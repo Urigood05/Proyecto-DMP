@@ -140,11 +140,27 @@ class ventana_modo_triangular:
 
         self.texto_desplazamientoy = tk.Label(self.raiz, text ="El desplazamiento en el eje y sera", font= ("Arial 18"), fg="black", bg="sky blue")
         self.texto_desplazamientoy.pack()
-        self.texto_desplazamientoy.place(x = 800, y = 240)
+        self.texto_desplazamientoy.place(x = 800, y = 250)
 
+        self.desplazamiento_en_y = tk.Entry(self.raiz, font = "Arial 18")
+        self.desplazamiento_en_y.pack()
+        self.desplazamiento_en_y.place(x = 840 , y = 300)
 
+        self.boton_ejecutar_operacion = tk.Button(self.raiz, text = "Ejecutar", font = ("Arial 16"), padx = 20, pady= 10)
+        self.boton_ejecutar_operacion.place(x = 615 , y = 450)
+        self.boton_ejecutar_operacion.config(bd = 20)
+        self.boton_ejecutar_operacion.config(relief= "groove")
+        self.boton_ejecutar_operacion.config(bg = "green")
 
+        self.volver_menu_principal = tk.Button(self.raiz, text = "volver al menu principal",font = ("Arial 16"), padx = 30, pady= 10)
+        self.volver_menu_principal.place(x = 1000 , y = 700)
+        self.volver_menu_principal.config(bd = 20)
+        self.volver_menu_principal.config(relief = "groove")
+        self.volver_menu_principal.config(bg = "red")
         
+        
+
+
 ventana_principal()
 
 
