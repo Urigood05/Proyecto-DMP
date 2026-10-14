@@ -68,7 +68,7 @@ class ventana_modo_coordenadas:
 
         self.validar_comando1 = self.raiz.register(self.solo_numeros_coordenada_y)
 
-        self.ingresar_coordenadasy = tk.Entry(self.raiz, font=("Arial 18"), validat = "key", validar = (self.validar_comando1, '%P'))
+        self.ingresar_coordenadasy = tk.Entry(self.raiz, font=("Arial 18"), validate = "key", validatecommand = (self.validar_comando1, '%P'))
         self.ingresar_coordenadasy.pack()
         self.ingresar_coordenadasy.place(x = 570 , y = 370)
 
