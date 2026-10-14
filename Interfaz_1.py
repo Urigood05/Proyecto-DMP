@@ -1,4 +1,5 @@
 import tkinter as tk #libreria de la interfaz
+from tkinter import ttk
 from tkinter import messagebox
 import math
 import sys #libreria para controlar el apagado del programa
@@ -42,7 +43,7 @@ class ventana_principal:
         ventana_modo_coordenadas(ventana_coordenadas, self.raiz)  # se ejecuta la instruccion
 
     def abrir_triangular(self):
-        self.raiz.withdraw()    # ocultamos la primera ventana
+        self.raiz.withdraw()    # ocultamos la segunda ventana
         ventana_triangular = tk.Toplevel(self.raiz)
         ventana_modo_triangular(ventana_triangular,self.raiz)
 
@@ -80,7 +81,7 @@ class ventana_modo_coordenadas:
         self.ingresar_coordenadasy.pack()
         self.ingresar_coordenadasy.place(x = 570 , y = 390)
 
-        self.boton_ejecutar = tk.Button(self.raiz, text = "Ejecutar", font = ("Arial 16"), padx = 20, pady= 10, command=self.verificar_coordenadas)
+        self.boton_ejecutar = tk.Button(self.raiz, text = "Ejecutar", font = ("Arial 16"), padx = 20, pady= 10, command = (self.verificar_coordenadas , self.abrir_ventana_panel))
         self.boton_ejecutar.place(x = 615 , y = 450)
         self.boton_ejecutar.config(bd = 20)
         self.boton_ejecutar.config(relief= "groove")
@@ -141,6 +142,12 @@ class ventana_modo_coordenadas:
                 return True # Si es un número y es <= 300, lo permitimos
             
             return False   # Si el usuario intentó escribir letras o símbolos, lo rechazamos
+
+    def abrir_ventana_panel(self):
+            self.raiz.withdraw()    # ocultamos la segunda ventana
+            ventana_panel = tk.Toplevel(self.raiz)
+            panel_de_control(ventana_panel,self.raiz)
+    
 
     # falta que nomas se pongan numeros en la coordenada y pero no conozco hasta cuanto se tiene que poner 
     # tambien me falta hacer una declaracion porque 
@@ -314,6 +321,23 @@ class ventana_modo_triangular:
 
      # me falta ajustar que nomas se ingresen nuneros en la hipotenusa pero no conosco su valor maximo mejor despues de lo pongo        
         
+class panel_de_control:
+     def __init__(self, ventana_origen, ventana_panel):
+
+        self.ventana_origen = ventana_origen
+        self.raiz = ventana_panel
+        
+        self.raiz = tk.Tk()  # se crea la ventana
+        self.raiz.title("mi primera ventana")   #se le pone el nombre a la ventana
+        self.raiz.resizable(False,False)  #se bloquea el ajuste de la ventana
+        self.raiz.geometry("1400x850")   #tamaño de la ventana
+        self.raiz.config(bg="sky blue") # defino el color celeste como fondo de pantalla
+
+        self.tabla_panel = ttk.Treeview(self.raiz, columns=("col1"))
+
+        self.tabla_panel.column("#0" , width = 80 , anchor = "center")
+        self.tabla_panel.heading("#0", text= "Motor de desplazamiento lineal", anchor= "center")
+                                
 
 
 ventana_principal()
