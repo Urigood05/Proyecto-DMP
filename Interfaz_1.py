@@ -70,7 +70,7 @@ class ventana_modo_coordenadas:
 
         self.ingresar_coordenadasy = tk.Entry(self.raiz, font=("Arial 18"), validate = "key", validatecommand = (self.validar_comando1, '%P'))
         self.ingresar_coordenadasy.pack()
-        self.ingresar_coordenadasy.place(x = 570 , y = 370)
+        self.ingresar_coordenadasy.place(x = 570 , y = 390)
 
         self.boton_ejecutar = tk.Button(self.raiz, text = "Ejecutar", font = ("Arial 16"), padx = 20, pady= 10)
         self.boton_ejecutar.place(x = 615 , y = 450)
@@ -146,13 +146,15 @@ class ventana_modo_triangular:
         self.texto_triangular.pack(pady = 50)  #tamaño del texto
         self.texto_triangular.place(x=450 , y=50) # ubico el tamaño del texto
 
-        self.texto__hipotenusa = tk.Label(self.raiz, text= "Ingrese el valor de la hipotenusa", font=("Arial 18"), fg="black", bg="sky blue")
+        self.texto__hipotenusa = tk.Label(self.raiz, text= "Ingrese el valor de la hipotenusa \n (por lo pronto 100 milimetros max)", font=("Arial 18"), fg="black", bg="sky blue")
         self.texto__hipotenusa.pack(pady = 50)  #tamaño del texto
         self.texto__hipotenusa.place(x=300 , y=140) # ubico el tamaño del texto
 
-        self.ingresar_valor_hipotenusa = tk.Entry(self.raiz, font=("Arial 16"), textvariable= self.valor_hipotenusa)
+        self.validar_comando1 = self.raiz.register(self.solo_numeros_hipotenusa)
+
+        self.ingresar_valor_hipotenusa = tk.Entry(self.raiz, font=("Arial 16"), textvariable= self.valor_hipotenusa, validate = "key", validatecommand=(self.validar_comando1, "%P") )
         self.ingresar_valor_hipotenusa.pack()
-        self.ingresar_valor_hipotenusa.place(x = 350 , y = 190)
+        self.ingresar_valor_hipotenusa.place(x = 350 , y = 200)
 
         self.ingresar_angulo = tk.Label(self.raiz, text= "Ingresa el valor del angulo", font = ("Arial 18"), fg="black", bg="sky blue")
         self.ingresar_angulo.pack(pady = 50)
@@ -258,6 +260,25 @@ class ventana_modo_triangular:
                         return True # Si es un número y es <= 360, lo permitimos
                     
                     return False   # Si el usuario intentó escribir letras o símbolos, lo rechazamos
+
+    
+    def solo_numeros_hipotenusa(self, texto_nuevo):
+            if texto_nuevo == "":  # si despues de que el usuario cometetiera el error le permitimos que corriga el error
+                return True
+            
+            if texto_nuevo.isdigit():  # aqui se revisa si lo que se escribio fueron numeros
+                
+                valor = int(texto_nuevo) #se convierte el texto a un numero entero para que se compare
+                
+                if valor > 100: # se verifica si se pada el limite
+                    # se muestra la ventana de advertencia
+                    messagebox.showwarning("Valor inválido", "Los caracteres numericos que se ingresaron no son validos, por favor ingrese de nuevo los caracteres numericos")
+                    return False # Rechazamos el ingreso de ese número
+                
+                return True # Si es un número y es <= 300, lo permitimos
+            
+            return False   # Si el usuario intentó escribir letras o símbolos, lo rechazamos
+
 
      # me falta ajustar que nomas se ingresen nuneros en la hipotenusa pero no conosco su valor maximo mejor despues de lo pongo        
         
