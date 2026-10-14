@@ -1,5 +1,6 @@
 import tkinter as tk #libreria de la interfaz
 from tkinter import messagebox
+import math
 class ventana_principal:
     def __init__(self):
        
@@ -33,8 +34,9 @@ class ventana_principal:
         ventana_modo_coordenadas(ventana_coordenadas, self.raiz)  # se ejecuta la instruccion
 
     def abrir_triangular(self):
+        self.raiz.withdraw()    # ocultamos la primera ventana
         ventana_triangular = tk.Toplevel(self.raiz)
-        ventana_modo_triangular(ventana_triangular)
+        ventana_modo_triangular(ventana_triangular,self.raiz)
 
 class ventana_modo_coordenadas:
     def __init__(self, ventana_coordenadas, ventana_origen):
@@ -56,15 +58,17 @@ class ventana_modo_coordenadas:
 
         self.validar_comando = self.raiz.register(self.solo_numeros)
 
-        self.ingresar_coordenadas = tk.Entry(self.raiz, font=("Arial 18"),validate= "key", validatecommand=(self.validar_comando, '%P') )
+        self.ingresar_coordenadas = tk.Entry(self.raiz, font=("Arial 18"),validate= "key", validatecommand=(self.validar_comando, '%P') ) # el key es para evaluar la entrada de texto
         self.ingresar_coordenadas.pack()
         self.ingresar_coordenadas.place(x = 570 , y = 270)
 
-        self.texto_de_y = tk.Label(self.raiz, text= "Ingrese el valor de y en milimetros", font=("Arial 18"), fg="black", bg="sky blue") # se crea el cuadro de texto de y
+        self.texto_de_y = tk.Label(self.raiz, text= "Ingrese el valor de y en milimetros \n (por lo pronto le pongo 100 milimetros)", font=("Arial 18"), fg="black", bg="sky blue") # se crea el cuadro de texto de y
         self.texto_de_y.pack(pady = 50) 
         self.texto_de_y.place(x = 510 , y = 320 )
 
-        self.ingresar_coordenadasy = tk.Entry(self.raiz, font=("Arial 18"))
+        self.validar_comando1 = self.raiz.register(self.solo_numeros_coordenada_y)
+
+        self.ingresar_coordenadasy = tk.Entry(self.raiz, font=("Arial 18"), validat = "key", validar = (self.validar_comando1, '%P'))
         self.ingresar_coordenadasy.pack()
         self.ingresar_coordenadasy.place(x = 570 , y = 370)
 
@@ -101,10 +105,38 @@ class ventana_modo_coordenadas:
         
         return False   # Si el usuario intentó escribir letras o símbolos, lo rechazamos
 
+    def solo_numeros_coordenada_y(self, texto_nuevo):
+            if texto_nuevo == "":  # si despues de que el usuario cometetiera el error le permitimos que corriga el error
+                return True
+            
+            if texto_nuevo.isdigit():  # aqui se revisa si lo que se escribio fueron numeros
+                
+                valor = int(texto_nuevo) #se convierte el texto a un numero entero para que se compare
+                
+                if valor > 100: # se verifica si se pada el limite
+                    # se muestra la ventana de advertencia
+                    messagebox.showwarning("Valor inválido", "Los caracteres numericos que se ingresaron no son validos, por favor ingrese de nuevo los caracteres numericos")
+                    return False # Rechazamos el ingreso de ese número
+                
+                return True # Si es un número y es <= 300, lo permitimos
+            
+            return False   # Si el usuario intentó escribir letras o símbolos, lo rechazamos
+
+    # falta que nomas se pongan numeros en la coordenada y pero no conozco hasta cuanto se tiene que poner 
+    # tambien me falta hacer una declaracion porque 
+
 
 class ventana_modo_triangular:
-    def __init__(self, ventana_triangular):
+    def __init__(self, ventana_triangular, ventana_origen):
+        self.ventana_origen = ventana_origen
         self.raiz = ventana_triangular
+
+        self.valor_hipotenusa = tk.StringVar() # llamamos a la funcion el stringvar porque actua como un espia para el calculo automatico
+        self.valor_angulo = tk.StringVar()
+                
+        self.valor_hipotenusa.trace_add("write", self.calcular_automatico) # se le ordena ejecutar la funcion cada que el usuario escriba 
+        self.valor_angulo.trace_add("write", self.calcular_automatico) # el trace add son palabras exclusivas
+
         self.raiz.title("MODO TRIANGULAR")   #se le pone el nombre a la ventana
         self.raiz.resizable(False,False)  #se bloquea el ajuste de la ventana
         self.raiz.geometry("1400x850")   #tamaño de la ventana
@@ -118,7 +150,7 @@ class ventana_modo_triangular:
         self.texto__hipotenusa.pack(pady = 50)  #tamaño del texto
         self.texto__hipotenusa.place(x=300 , y=140) # ubico el tamaño del texto
 
-        self.ingresar_valor_hipotenusa = tk.Entry(self.raiz, font=("Arial 16"))
+        self.ingresar_valor_hipotenusa = tk.Entry(self.raiz, font=("Arial 16"), textvariable= self.valor_hipotenusa)
         self.ingresar_valor_hipotenusa.pack()
         self.ingresar_valor_hipotenusa.place(x = 350 , y = 190)
 
@@ -126,7 +158,9 @@ class ventana_modo_triangular:
         self.ingresar_angulo.pack(pady = 50)
         self.ingresar_angulo.place( x= 320 , y = 250)
 
-        self.ingresar_texto_angulo = tk.Entry(self.raiz, font = ("Arial 16"))
+        self.validar_comando = self.raiz.register(self.solo_numeros)
+
+        self.ingresar_texto_angulo = tk.Entry(self.raiz, font = ("Arial 16"), textvariable = self.valor_angulo, validate= "key", validatecommand=(self.validar_comando, '%P'))
         self.ingresar_texto_angulo.pack()
         self.ingresar_texto_angulo.place(x = 350 , y = 300)
 
@@ -152,12 +186,80 @@ class ventana_modo_triangular:
         self.boton_ejecutar_operacion.config(relief= "groove")
         self.boton_ejecutar_operacion.config(bg = "green")
 
-        self.volver_menu_principal = tk.Button(self.raiz, text = "volver al menu principal",font = ("Arial 16"), padx = 30, pady= 10)
+        self.volver_menu_principal = tk.Button(self.raiz, text = "volver al menu principal",font = ("Arial 16"), padx = 30, pady= 10, command=self.regresar)
         self.volver_menu_principal.place(x = 1000 , y = 700)
         self.volver_menu_principal.config(bd = 20)
         self.volver_menu_principal.config(relief = "groove")
         self.volver_menu_principal.config(bg = "red")
-        
+
+      # --- FUNCIONES ADICIONALES DE LA VENTANA ---
+    def regresar(self):
+        self.raiz.destroy() # cierra esta ventana
+        self.ventana_origen.deiconify() # muestra la ventana principal
+
+    def calcular_automatico(self, *args):
+        try:
+            texto_hip = self.valor_hipotenusa.get()
+            texto_ang = self.valor_angulo.get()
+            
+            # Si borran el texto, vaciamos los resultados
+            if texto_hip == "" or texto_ang == "":
+                self.desplazamiento.delete(0, tk.END)
+                self.desplazamiento_en_y.delete(0, tk.END)
+                return
+            
+            # Convertimos el texto a números con decimales
+            hip = float(texto_hip)
+            ang = float(texto_ang)
+            
+            # Fórmulas trigonométricas (convertimos a radianes primero)
+            ang_rad = math.radians(ang)
+            val_x = hip * math.cos(ang_rad)
+            val_y = hip * math.sin(ang_rad)
+            
+            # Tu regla especial: si termina en <= .5 se queda abajo, si es .6 sube.
+            def redondear_especial(valor):
+                entero = int(valor)
+                decimal = abs(valor - entero)
+                if decimal <= 0.5:
+                    return entero
+                else:
+                    return entero + 1 if valor > 0 else entero - 1
+            
+            # Aplicamos tu regla de redondeo
+            val_x_redondeado = redondear_especial(val_x)
+            val_y_redondeado = redondear_especial(val_y)
+            
+            # Escribimos los resultados en los cuadros de la derecha
+            self.desplazamiento.delete(0, tk.END)
+            self.desplazamiento.insert(0, str(val_x_redondeado))
+            
+            self.desplazamiento_en_y.delete(0, tk.END)
+            self.desplazamiento_en_y.insert(0, str(val_y_redondeado))
+            
+        except ValueError:
+            # Si escriben letras por accidente, ignoramos el error para que no explote
+            pass
+
+
+    def solo_numeros(self, texto_nuevo):
+                    if texto_nuevo == "":  # si despues de que el usuario cometetiera el error le permitimos que corriga el error
+                        return True
+                    
+                    if texto_nuevo.isdigit():  # aqui se revisa si lo que se escribio fueron numeros
+                        
+                        valor = int(texto_nuevo) #se convierte el texto a un numero entero para que se compare
+                        
+                        if valor > 360: # se verifica si se pada el limite
+                            # se muestra la ventana de advertencia
+                            messagebox.showwarning("Valor inválido", "Los caracteres numericos que se ingresaron no son validos, por favor ingrese de nuevo los caracteres numericos")
+                            return False # Rechazamos el ingreso de ese número
+                        
+                        return True # Si es un número y es <= 360, lo permitimos
+                    
+                    return False   # Si el usuario intentó escribir letras o símbolos, lo rechazamos
+
+     # me falta ajustar que nomas se ingresen nuneros en la hipotenusa pero no conosco su valor maximo mejor despues de lo pongo        
         
 
 
