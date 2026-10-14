@@ -1,6 +1,7 @@
 import tkinter as tk #libreria de la interfaz
 from tkinter import messagebox
 import math
+import sys #libreria para controlar el apagado del programa
 class ventana_principal:
     def __init__(self):
        
@@ -26,7 +27,14 @@ class ventana_principal:
         self.boton_modo_triangular.config(relief= "groove") # estilo del boton
         self.boton_modo_triangular.config(bg="yellow")  #fondo del boton
 
+        self.raiz.protocol("WM_DELETE_WINDOW", self.cerrar_todo) ## esta linea de codigo detecta el click de X en la ventana
+        
         self.raiz.mainloop() 
+
+    def cerrar_todo(self):
+        self.raiz.quit()    # 1. Detiene el mainloop
+        self.raiz.destroy() # 2. Destruye la ventana
+        sys.exit()          # 3. Apaga Python por completo y libera la terminal
 
     def abrir_coordenadas(self): #creo la funcion
         self.raiz.withdraw()    # ocultamos la primera ventana
@@ -72,7 +80,7 @@ class ventana_modo_coordenadas:
         self.ingresar_coordenadasy.pack()
         self.ingresar_coordenadasy.place(x = 570 , y = 390)
 
-        self.boton_ejecutar = tk.Button(self.raiz, text = "Ejecutar", font = ("Arial 16"), padx = 20, pady= 10)
+        self.boton_ejecutar = tk.Button(self.raiz, text = "Ejecutar", font = ("Arial 16"), padx = 20, pady= 10, command=self.verificar_coordenadas)
         self.boton_ejecutar.place(x = 615 , y = 450)
         self.boton_ejecutar.config(bd = 20)
         self.boton_ejecutar.config(relief= "groove")
@@ -83,6 +91,18 @@ class ventana_modo_coordenadas:
         self.volver_menu_principal.config(bd = 20)
         self.volver_menu_principal.config(relief = "groove")
         self.volver_menu_principal.config(bg = "red")
+
+    def verificar_coordenadas(self):
+        # Obtenemos el texto escrito en las cajas de X y Y
+        texto_x = self.ingresar_coordenadas.get()
+        texto_y = self.ingresar_coordenadasy.get()
+        
+        # Revisamos si alguna de las dos está totalmente vacía
+        if texto_x == "" or texto_y == "":
+            messagebox.showwarning("Campos vacíos", "Por favor, ingrese los valores de x y y antes de presionar Ejecutar.")
+        else:
+            # Aquí irá el código matemático o o el enlace del arduino
+            pass
 
     def regresar(self):
         self.raiz.destroy() # Destruye la ventana de coordenadas
@@ -144,7 +164,7 @@ class ventana_modo_triangular:
 
         self.texto_triangular = tk.Label(self.raiz, text = "MODO TRIANGULAR",  font=("Arial 24"), fg="black", bg="sky blue")
         self.texto_triangular.pack(pady = 50)  #tamaño del texto
-        self.texto_triangular.place(x=450 , y=50) # ubico el tamaño del texto
+        self.texto_triangular.place(x=560 , y=50) # ubico el tamaño del texto
 
         self.texto__hipotenusa = tk.Label(self.raiz, text= "Ingrese el valor de la hipotenusa \n (por lo pronto 100 milimetros max)", font=("Arial 18"), fg="black", bg="sky blue")
         self.texto__hipotenusa.pack(pady = 50)  #tamaño del texto
@@ -182,7 +202,7 @@ class ventana_modo_triangular:
         self.desplazamiento_en_y.pack()
         self.desplazamiento_en_y.place(x = 840 , y = 300)
 
-        self.boton_ejecutar_operacion = tk.Button(self.raiz, text = "Ejecutar", font = ("Arial 16"), padx = 20, pady= 10)
+        self.boton_ejecutar_operacion = tk.Button(self.raiz, text = "Ejecutar", font = ("Arial 16"), padx = 20, pady= 10,command=self.verificar_triangulo)
         self.boton_ejecutar_operacion.place(x = 615 , y = 450)
         self.boton_ejecutar_operacion.config(bd = 20)
         self.boton_ejecutar_operacion.config(relief= "groove")
@@ -241,6 +261,18 @@ class ventana_modo_triangular:
             
         except ValueError:
             # Si escriben letras por accidente, ignoramos el error para que no explote
+            pass
+
+    def verificar_triangulo(self):
+        # Usamos tus variables espía para leer el contenido actual
+        hip = self.valor_hipotenusa.get()
+        ang = self.valor_angulo.get()
+        
+        if hip == "" or ang == "":
+            messagebox.showwarning("Campos vacíos", "Por favor, ingrese el valor de la hipotenusa y el ángulo antes de presionar Ejecutar.")
+        else:
+            # Como el cálculo ya lo hicimos automático con trace_add, aquí no es necesario hacer matemáticas, 
+            # pero el botón cumple la función de validar que no falten datos.
             pass
 
 
