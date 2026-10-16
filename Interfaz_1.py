@@ -162,6 +162,7 @@ class ventana_modo_coordenadas:
         ventana_panel = tk.Toplevel(self.raiz)
         panel_de_control(ventana_panel, self.raiz)
 
+
     # Si pasa la comprobación, ocultamos esta ventana y abrimos el panel 
     
     # falta que nomas se pongan numeros en la coordenada y pero no conozco hasta cuanto se tiene que poner 
@@ -224,7 +225,7 @@ class ventana_modo_triangular:
         self.desplazamiento_en_y.pack()
         self.desplazamiento_en_y.place(x = 840 , y = 300)
 
-        self.boton_ejecutar_operacion = tk.Button(self.raiz, text = "Ejecutar", font = ("Arial 16"), padx = 20, pady= 10,command=self.verificar_triangulo)
+        self.boton_ejecutar_operacion = tk.Button(self.raiz, text = "Ejecutar", font = ("Arial 16"), padx = 20, pady= 10,command=self.ejecutar_y_abrir_panel)
         self.boton_ejecutar_operacion.place(x = 615 , y = 450)
         self.boton_ejecutar_operacion.config(bd = 20)
         self.boton_ejecutar_operacion.config(relief= "groove")
@@ -285,17 +286,17 @@ class ventana_modo_triangular:
             # Si escriben letras por accidente, ignoramos el error para que no explote
             pass
 
-    def verificar_triangulo(self):
-        # Usamos tus variables espía para leer el contenido actual
-        hip = self.valor_hipotenusa.get()
-        ang = self.valor_angulo.get()
+    #def verificar_triangulo(self):
+      #  # Usamos tus variables espía para leer el contenido actual
+       # hip = self.valor_hipotenusa.get()
+       # ang = self.valor_angulo.get()
         
-        if hip == "" or ang == "":
-            messagebox.showwarning("Campos vacíos", "Por favor, ingrese el valor de la hipotenusa y el ángulo antes de presionar Ejecutar.")
-        else:
+       # if hip == "" or ang == "":
+          #  messagebox.showwarning("Campos vacíos", "Por favor, ingrese el valor de la hipotenusa y el ángulo antes de presionar Ejecutar.")
+      #  else:
             # Como el cálculo ya lo hicimos automático con trace_add, aquí no es necesario hacer matemáticas, 
             # pero el botón cumple la función de validar que no falten datos.
-            pass
+          #  pass
 
 
     def solo_numeros(self, texto_nuevo):
@@ -333,7 +334,19 @@ class ventana_modo_triangular:
             
             return False   # Si el usuario intentó escribir letras o símbolos, lo rechazamos
 
-
+    def ejecutar_y_abrir_panel(self):
+        # No modificamos verificar_coordenadas() — simplemente comprobamos aquí
+            hip = self.valor_hipotenusa.get()
+            ang = self.valor_angulo.get()
+    
+            if hip == "" or ang == "":
+            # mostramos la misma advertencia que ya usabas
+                messagebox.showwarning("Campos vacíos", "Por favor, ingrese los valores de x y y antes de presionar Ejecutar.")
+                return
+            self.raiz.withdraw()
+            ventana_panel = tk.Toplevel(self.raiz)
+            panel_de_control(ventana_panel, self.raiz)
+    
      # me falta ajustar que nomas se ingresen nuneros en la hipotenusa pero no conosco su valor maximo mejor despues de lo pongo        
         
 class panel_de_control:
@@ -347,11 +360,31 @@ class panel_de_control:
         self.raiz.geometry("1400x850")   #tamaño de la ventana
         self.raiz.config(bg="sky blue") # defino el color celeste como fondo de pantalla
 
-        self.tabla_panel = ttk.Treeview(self.raiz, columns=("col1"))
+       # self.tabla_panel = ttk.Treeview(self.raiz, columns=("col1"))
 
-        self.tabla_panel.column("#0" , width = 80 , anchor = "center")
-        self.tabla_panel.heading("#0", text= "Motor de desplazamiento lineal", anchor= "center")
-                                
+        #self.tabla_panel.column("#0" , width = 400 , anchor = "center")
+        #self.tabla_panel.column("col1", width = 400 , anchor = "center")
+        #self.tabla_panel.heading("#0", text= "Motor de desplazamiento lineal", anchor= "center")
+        #self.tabla_panel.heading("col1", text = "Motor de desplazamiento angular", anchor = "center")
+        #self.tabla_panel.place( x= 100 , y = 150, width= 800 , height= 500)
+
+        self.celda_motor_lineal = tk.Frame(self.raiz, bg="white", highlightbackground="black", highlightthickness=2)
+        self.celda_motor_lineal.place(x=100, y=100, width=400, height=50) 
+        self.texto_motor_lineal = tk.Label(self.celda_motor_lineal, text=" desplazamiento Lineal X", font=("Arial", 16, "bold"), fg="blue", bg="white")
+        self.texto_motor_lineal.place(x=20, y=10) 
+
+        self.valor_motor_lineal = tk.Frame(self.raiz, bg="white", highlightbackground="black", highlightthickness=2)
+        self.valor_motor_lineal.place(x = 100, y = 150, width = 400 , height = 200) 
+        # falta añadirle el valor mostrado del motor lineal
+
+        self.revolucion_motor_lineal = tk.Frame(self.raiz, bg="white", highlightbackground="black", highlightthickness=2)
+        self.revolucion_motor_lineal.place(x=100, y= 300, width=400, height=50)
+        self.texto_valor_revolucion_ml = tk.Label(self.revolucion_motor_lineal, text=" revolucion del motor eje X", font=("Arial", 16, "bold"), fg="blue", bg="white")
+        self.texto_valor_revolucion_ml.place(x = 20 , y = 10)
+
+        self.valor_revolucion_ml = tk.Frame(self.raiz, bg="white", highlightbackground="black", highlightthickness=2)
+        self.valor_revolucion_ml.place(x = 100, y = 350, width = 400 , height = 100)
+
 
 
 ventana_principal()
