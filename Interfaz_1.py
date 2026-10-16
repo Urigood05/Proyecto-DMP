@@ -370,20 +370,47 @@ class panel_de_control:
 
         self.celda_motor_lineal = tk.Frame(self.raiz, bg="white", highlightbackground="black", highlightthickness=2)
         self.celda_motor_lineal.place(x=100, y=100, width=400, height=50) 
-        self.texto_motor_lineal = tk.Label(self.celda_motor_lineal, text=" desplazamiento Lineal X", font=("Arial", 16, "bold"), fg="blue", bg="white")
-        self.texto_motor_lineal.place(x=20, y=10) 
+        self.texto_motor_lineal = tk.Label(self.celda_motor_lineal, text=" DESPLAZAMIENTO LINEAL X", font=("Arial", 16, "bold"), fg="blue", bg="white")
+        self.texto_motor_lineal.place(x=30, y=10) 
 
         self.valor_motor_lineal = tk.Frame(self.raiz, bg="white", highlightbackground="black", highlightthickness=2)
-        self.valor_motor_lineal.place(x = 100, y = 150, width = 400 , height = 200) 
+        self.valor_motor_lineal.place(x = 100, y = 150, width = 400 , height = 152) 
         # falta añadirle el valor mostrado del motor lineal
 
         self.revolucion_motor_lineal = tk.Frame(self.raiz, bg="white", highlightbackground="black", highlightthickness=2)
         self.revolucion_motor_lineal.place(x=100, y= 300, width=400, height=50)
-        self.texto_valor_revolucion_ml = tk.Label(self.revolucion_motor_lineal, text=" revolucion del motor eje X", font=("Arial", 16, "bold"), fg="blue", bg="white")
+        self.texto_valor_revolucion_ml = tk.Label(self.revolucion_motor_lineal, text="REVOLUCION DEL MOTOR EJE X", font=("Arial", 16, "bold"), fg="red", bg="white")
         self.texto_valor_revolucion_ml.place(x = 20 , y = 10)
 
         self.valor_revolucion_ml = tk.Frame(self.raiz, bg="white", highlightbackground="black", highlightthickness=2)
         self.valor_revolucion_ml.place(x = 100, y = 350, width = 400 , height = 100)
+        # falta añadirle el valor de la revolucion
+
+        self.pasos_motor_lineal = tk.Frame(self.raiz, bg="white", highlightbackground="black", highlightthickness=2)
+        self.pasos_motor_lineal.place(x = 100 , y = 450, width= 400 , height=50)
+        self.texto_pasos_motor_lineal = tk.Label(self.pasos_motor_lineal, text=" PASOS DEL MOTOR EJE X", font=("Arial", 16, "bold"), fg="green", bg="white")
+        self.texto_pasos_motor_lineal.place(x = 30 , y=10)
+
+        self.valor_pasos_ml = tk.Frame(self.raiz,  bg="white", highlightbackground="black", highlightthickness=2)
+        self.valor_pasos_ml.place(x = 100 , y= 500, width= 400 , height= 100 )
+        #falta añadirle los pasos del motor
+
+        self.celda_motor_angular = tk.Frame(self.raiz, bg="white", highlightbackground="black", highlightthickness=2)
+        self.celda_motor_angular.place(x = 500, y = 100, width = 400 , height = 50) 
+        self.texto_motor_angular = tk.Label(self.celda_motor_angular, text=" DESPLAZAMIENTO ANGULAR ", font=("Arial", 16, "bold"), fg="blue", bg="white" )
+        self.texto_motor_angular.place( x= 30 , y=10)
+
+        self.valor_motor_angular = tk.Frame(self.raiz,bg="white", highlightbackground="black", highlightthickness=2)
+        self.valor_motor_angular.place(x = 500, y = 150, width = 400 , height = 152)
+        #falta añadirle el valor angular
+
+        self.revolucion_motor_angular = tk.Frame(self.raiz,  bg="white", highlightbackground="black", highlightthickness=2)
+        self.revolucion_motor_angular.place(x=500, y= 300, width=400, height=50)
+        self.texto_revolucion_ma = tk.Label(self.revolucion_motor_angular, text="REVOLUCIONES DEL MOTOR EJE Y ", font=("Arial", 16, "bold"), fg="red", bg="white")
+        self.texto_revolucion_ma.place( x= 20 , y=10)
+
+        self.valor_revolucion_ma = tk.Frame(self.raiz, bg="white", highlightbackground="black", highlightthickness=2)
+        self.valor_revolucion_ma.place(x = 500, y = 350, width = 400 , height = 100)
 
 
 
