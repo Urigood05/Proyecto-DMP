@@ -13,7 +13,7 @@ class ventana_principal:
         self.raiz.config(bg="sky blue") # defino el color celeste como fondo de pantalla
 
         self.texto_principal = tk.Label(self.raiz, text="ELIGE EL MODO DE ENTRADA", font=("Arial 24"), fg="black", bg="sky blue") #añado un texto principal
-        self.texto_principal.pack(pady=50) #modifico el tamaño del texto
+       ## self.texto_principal.pack(pady=50) #modifico el tamaño del texto
         self.texto_principal.place(x=500 , y=250) # ubico el tamaño del texto
 
         self.boton_modo_coordenadas = tk.Button(self.raiz, text ="MODO COORDENADAS", padx=30, pady= 10,font=("Arial 14"), command = self.abrir_coordenadas) # creo un boton, poniendo el texto, el tamaño del boton, y el tipo de letra y el tamaño de la letra
@@ -58,30 +58,30 @@ class ventana_modo_coordenadas:
         self.raiz.config(bg="sky blue") # defino el color celeste como fondo de pantalla
 
         self.texto_principal = tk.Label(self.raiz, text="MODO COORDENADAS", font=("Arial 36"), fg="black", bg="sky blue",) #añado un texto principal
-        self.texto_principal.pack(pady=70) #modifico el tamaño del texto
+       # self.texto_principal.pack(pady=70) #modifico el tamaño del texto
         self.texto_principal.place(x=450 , y=100) # ubico el tamaño del texto
 
         self.texto_de_x = tk.Label(self.raiz, text= "Ingrese el valor de x en milimetros \n (Maximo 300 milimetros)", font=("Arial 18"), fg="black", bg="sky blue")
-        self.texto_de_x.pack(pady = 50)  #tamaño del texto
+      #  self.texto_de_x.pack(pady = 50)  #tamaño del texto
         self.texto_de_x.place(x=510 , y=200) # ubico el tamaño del texto
 
         self.validar_comando = self.raiz.register(self.solo_numeros)
 
         self.ingresar_coordenadas = tk.Entry(self.raiz, font=("Arial 18"),validate= "key", validatecommand=(self.validar_comando, '%P') ) # el key es para evaluar la entrada de texto
-        self.ingresar_coordenadas.pack()
+       # self.ingresar_coordenadas.pack()
         self.ingresar_coordenadas.place(x = 570 , y = 270)
 
         self.texto_de_y = tk.Label(self.raiz, text= "Ingrese el valor de y en milimetros \n (por lo pronto le pongo 100 milimetros)", font=("Arial 18"), fg="black", bg="sky blue") # se crea el cuadro de texto de y
-        self.texto_de_y.pack(pady = 50) 
+       # self.texto_de_y.pack(pady = 50) 
         self.texto_de_y.place(x = 510 , y = 320 )
 
         self.validar_comando1 = self.raiz.register(self.solo_numeros_coordenada_y)
 
         self.ingresar_coordenadasy = tk.Entry(self.raiz, font=("Arial 18"), validate = "key", validatecommand = (self.validar_comando1, '%P'))
-        self.ingresar_coordenadasy.pack()
+       # self.ingresar_coordenadasy.pack()
         self.ingresar_coordenadasy.place(x = 570 , y = 390)
 
-        self.boton_ejecutar = tk.Button(self.raiz, text = "Ejecutar", font = ("Arial 16"), padx = 20, pady= 10, command = (self.verificar_coordenadas , self.abrir_ventana_panel))
+        self.boton_ejecutar = tk.Button(self.raiz, text = "Ejecutar", font = ("Arial 16"), padx = 20, pady= 10, command=self.ejecutar_y_abrir_panel)
         self.boton_ejecutar.place(x = 615 , y = 450)
         self.boton_ejecutar.config(bd = 20)
         self.boton_ejecutar.config(relief= "groove")
@@ -93,17 +93,16 @@ class ventana_modo_coordenadas:
         self.volver_menu_principal.config(relief = "groove")
         self.volver_menu_principal.config(bg = "red")
 
-    def verificar_coordenadas(self):
+   # def verificar_coordenadas(self):
         # Obtenemos el texto escrito en las cajas de X y Y
-        texto_x = self.ingresar_coordenadas.get()
-        texto_y = self.ingresar_coordenadasy.get()
+      #  texto_x = self.ingresar_coordenadas.get()
+       # texto_y = self.ingresar_coordenadasy.get()
         
         # Revisamos si alguna de las dos está totalmente vacía
-        if texto_x == "" or texto_y == "":
-            messagebox.showwarning("Campos vacíos", "Por favor, ingrese los valores de x y y antes de presionar Ejecutar.")
-        else:
-            # Aquí irá el código matemático o o el enlace del arduino
-            pass
+        #if texto_x == "" or texto_y == "":
+         #   messagebox.showwarning("Campos vacíos", "Por favor, ingrese los valores de x y y antes de presionar Ejecutar.")
+          #  return False
+      #  return True
 
     def regresar(self):
         self.raiz.destroy() # Destruye la ventana de coordenadas
@@ -143,12 +142,28 @@ class ventana_modo_coordenadas:
             
             return False   # Si el usuario intentó escribir letras o símbolos, lo rechazamos
 
-    def abrir_ventana_panel(self):
-            self.raiz.withdraw()    # ocultamos la segunda ventana
-            ventana_panel = tk.Toplevel(self.raiz)
-            panel_de_control(ventana_panel,self.raiz)
-    
+   # def ejecutar_y_abrir_panel(self):
+      #  if not self.verificar_coordenadas():
+       #     return
+       # self.raiz.withdraw()
+        #ventana_panel = tk.Toplevel(self.raiz)
+      #  panel_de_control(ventana_panel, self.raiz)
 
+    def ejecutar_y_abrir_panel(self):
+    # No modificamos verificar_coordenadas() — simplemente comprobamos aquí
+        texto_x = self.ingresar_coordenadas.get()
+        texto_y = self.ingresar_coordenadasy.get()
+
+        if texto_x == "" or texto_y == "":
+        # mostramos la misma advertencia que ya usabas
+            messagebox.showwarning("Campos vacíos", "Por favor, ingrese los valores de x y y antes de presionar Ejecutar.")
+            return
+        self.raiz.withdraw()
+        ventana_panel = tk.Toplevel(self.raiz)
+        panel_de_control(ventana_panel, self.raiz)
+
+    # Si pasa la comprobación, ocultamos esta ventana y abrimos el panel 
+    
     # falta que nomas se pongan numeros en la coordenada y pero no conozco hasta cuanto se tiene que poner 
     # tambien me falta hacer una declaracion porque 
 
@@ -322,13 +337,12 @@ class ventana_modo_triangular:
      # me falta ajustar que nomas se ingresen nuneros en la hipotenusa pero no conosco su valor maximo mejor despues de lo pongo        
         
 class panel_de_control:
-     def __init__(self, ventana_origen, ventana_panel):
+     def __init__(self, ventana_panel, ventana_origen):
 
-        self.ventana_origen = ventana_origen
         self.raiz = ventana_panel
+        self.ventana_origen = ventana_origen
         
-        self.raiz = tk.Tk()  # se crea la ventana
-        self.raiz.title("mi primera ventana")   #se le pone el nombre a la ventana
+        self.raiz.title("panel de control")   #se le pone el nombre a la ventana
         self.raiz.resizable(False,False)  #se bloquea el ajuste de la ventana
         self.raiz.geometry("1400x850")   #tamaño de la ventana
         self.raiz.config(bg="sky blue") # defino el color celeste como fondo de pantalla
