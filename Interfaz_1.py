@@ -350,7 +350,7 @@ class ventana_modo_triangular:
      # me falta ajustar que nomas se ingresen nuneros en la hipotenusa pero no conosco su valor maximo mejor despues de lo pongo        
         
 class panel_de_control:
-     def __init__(self, ventana_panel, ventana_origen):
+    def __init__(self, ventana_panel, ventana_origen):
 
         self.raiz = ventana_panel
         self.ventana_origen = ventana_origen
@@ -464,6 +464,23 @@ class panel_de_control:
 
         self.valor_estado_sensoran = tk.Frame(self.raiz, bg="white", highlightbackground="black", highlightthickness=2)
         self.valor_estado_sensoran.place(x = 1000, y = 650, width=300, height=50)
+        # aqui se va a ingresar el estado del sensor angular
+
+        self.volver_menu_principal = tk.Button(self.raiz, text = "Regresar",font = ("Arial 16"), padx = 30, pady= 10, command= self.regresar)
+        self.volver_menu_principal.place(x = 1000 , y = 740)
+        self.volver_menu_principal.config(bd = 20)
+        self.volver_menu_principal.config(relief = "groove")
+        self.volver_menu_principal.config(bg = "red")
+
+        self.volver_menu_principal = tk.Button(self.raiz, text = "Regresar a home",font = ("Arial 16"), padx = 30, pady= 10, )
+        self.volver_menu_principal.place(x = 550 , y = 630)
+        self.volver_menu_principal.config(bd = 20)
+        self.volver_menu_principal.config(relief = "groove")
+        self.volver_menu_principal.config(bg = "yellow")
+
+    def regresar(self):
+        self.raiz.destroy() # Destruye la ventana de coordenadas
+        self.ventana_origen.deiconify() # Vuelve a hacer visible la ventana principal
         
 
 
