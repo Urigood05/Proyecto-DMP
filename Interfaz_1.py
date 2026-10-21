@@ -375,7 +375,8 @@ class panel_de_control:
 
         self.valor_motor_lineal = tk.Frame(self.raiz, bg="white", highlightbackground="black", highlightthickness=2)
         self.valor_motor_lineal.place(x = 100, y = 150, width = 400 , height = 152) 
-        # falta añadirle el valor mostrado del motor lineal
+        self.texto_valor_motor_lineal = tk.Label(self.valor_motor_lineal,text=" 39 mm", font=("Arial", 50, "bold"), fg="blue", bg="white")
+        self.texto_valor_motor_lineal.place(x=80 , y=40)
 
         self.revolucion_motor_lineal = tk.Frame(self.raiz, bg="white", highlightbackground="black", highlightthickness=2)
         self.revolucion_motor_lineal.place(x=100, y= 300, width=400, height=50)
@@ -384,7 +385,8 @@ class panel_de_control:
 
         self.valor_revolucion_ml = tk.Frame(self.raiz, bg="white", highlightbackground="black", highlightthickness=2)
         self.valor_revolucion_ml.place(x = 100, y = 350, width = 400 , height = 100)
-        # falta añadirle el valor de la revolucion
+        self.texto_valor_revolucion_ml =tk.Label(self.valor_revolucion_ml,text=" 40 rev", font=("Arial", 40, "bold"), fg="red", bg="white")
+        self.texto_valor_revolucion_ml.place(x = 100 , y = 20)
 
         self.pasos_motor_lineal = tk.Frame(self.raiz, bg="white", highlightbackground="black", highlightthickness=2)
         self.pasos_motor_lineal.place(x = 100 , y = 450, width= 400 , height=50)
@@ -393,7 +395,8 @@ class panel_de_control:
 
         self.valor_pasos_ml = tk.Frame(self.raiz,  bg="white", highlightbackground="black", highlightthickness=2)
         self.valor_pasos_ml.place(x = 100 , y= 500, width= 400 , height= 100 )
-        #falta añadirle los pasos del motor
+        self.texto_valor_pasos_ml = tk.Label(self.valor_pasos_ml,text=" 10 pasos", font=("Arial", 40, "bold"), fg="green", bg="white") 
+        self.texto_valor_pasos_ml.place(x= 90 , y=20)
 
         self.celda_motor_angular = tk.Frame(self.raiz, bg="white", highlightbackground="black", highlightthickness=2)
         self.celda_motor_angular.place(x = 500, y = 100, width = 400 , height = 50) 
@@ -402,16 +405,18 @@ class panel_de_control:
 
         self.valor_motor_angular = tk.Frame(self.raiz,bg="white", highlightbackground="black", highlightthickness=2)
         self.valor_motor_angular.place(x = 500, y = 150, width = 400 , height = 152)
-        #falta añadirle el valor angular
+        self.texto_valor_motor_angular = tk.Label(self.valor_motor_angular, text=" 50 °", font=("Arial", 50, "bold"), fg="blue", bg="white")
+        self.texto_valor_motor_angular.place(x=100 , y=20)
 
         self.revolucion_motor_angular = tk.Frame(self.raiz,  bg="white", highlightbackground="black", highlightthickness=2)
         self.revolucion_motor_angular.place(x=500, y= 300, width=400, height=50)
         self.texto_revolucion_ma = tk.Label(self.revolucion_motor_angular, text="REVOLUCIONES DEL MOTOR EJE Y ", font=("Arial", 16, "bold"), fg="red", bg="white")
-        self.texto_revolucion_ma.place( x= 20 , y=10)
+        self.texto_revolucion_ma.place( x= 20 , y=15)
 
         self.valor_revolucion_ma = tk.Frame(self.raiz, bg="white", highlightbackground="black", highlightthickness=2)
         self.valor_revolucion_ma.place(x = 500, y = 350, width = 400 , height = 100)
-        # aqui falta añadir el valor de la revolucion
+        self.texto_valor_revolucion_ma =tk.Label(self.valor_revolucion_ma,text=" 20 rev", font=("Arial", 40, "bold"), fg="red", bg="white")
+        self.texto_valor_revolucion_ma.place(x = 100 , y = 20)
 
         self.pasos_motor_y =tk.Frame(self.raiz,  bg="white", highlightbackground="black", highlightthickness=2)
         self.pasos_motor_y.place(x = 500, y = 450, width = 400 , height = 50)
@@ -420,28 +425,76 @@ class panel_de_control:
 
         self.valor_pasos_motory = tk.Frame(self.raiz, bg="white", highlightbackground="black", highlightthickness=2)
         self.valor_pasos_motory.place(x = 500, y = 500, width = 400 , height = 100)
-        #aqui se va a introduccir el valor de los pasos del motor del eje y
+        self.texto_pasos_motory = tk.Label(self.valor_pasos_motory, text="20 pasos", font=("Arial", 40, "bold"), fg="green", bg="white")
+        self.texto_pasos_motory.place(x=90 , y= 20)
 
-        self.sensor_distancia_lineal = tk.Frame(self.raiz, bg="white", highlightbackground="black", highlightthickness=2)
-        self.sensor_distancia_lineal.place(x = 1000, y = 50, width = 300 , height = 75)
-        self.sensor_lineal = tk.Label(self.sensor_distancia_lineal,  text="SENSOR DE DISTANCIA \n LINEAL ", font=("Arial", 14, "bold"), fg="black", bg="white")
-        self.sensor_lineal.place(x = 40 , y =10)
+      #  self.sensor_distancia_lineal = tk.Frame(self.raiz, bg="white", highlightbackground="black", highlightthickness=2)
+      #  self.sensor_distancia_lineal.place(x = 1000, y = 50, width = 300 , height = 75)
+      #  self.sensor_lineal = tk.Label(self.sensor_distancia_lineal,  text="SENSOR DE DISTANCIA \n LINEAL ", font=("Arial", 14, "bold"), fg="black", bg="white")
+      #  self.sensor_lineal.place(x = 40 , y =10)
 
-        self.texto_distancia_lineal =tk.Frame(self.raiz,bg="white", highlightbackground="black", highlightthickness=2)
-        self.texto_distancia_lineal.place(x = 1000 , y = 120, width = 300 , height = 50)
-        self.textdis = tk.Label(self.texto_distancia_lineal, text="DISTANCIA ", font=("Arial", 14, "bold"), fg="black", bg="white")
-        self.textdis.place(x = 100 , y = 10)
-        self.valor_sensor_lineal = tk.Frame(self.raiz, bg="white", highlightbackground="black", highlightthickness=2)
-        self.valor_sensor_lineal.place(x = 1000, y = 170, width=300, height=100)
+      #  self.texto_distancia_lineal =tk.Frame(self.raiz,bg="white", highlightbackground="black", highlightthickness=2)
+       # self.texto_distancia_lineal.place(x = 1000 , y = 120, width = 300 , height = 50)
+       # self.textdis = tk.Label(self.texto_distancia_lineal, text="DISTANCIA ", font=("Arial", 14, "bold"), fg="black", bg="white")
+       # self.textdis.place(x = 100 , y = 10)
+       # self.valor_sensor_lineal = tk.Frame(self.raiz, bg="white", highlightbackground="black", highlightthickness=2)
+       # self.valor_sensor_lineal.place(x = 1000, y = 170, width=300, height=100)
         #aqui se va a introduccir el valor del sensor lineal en mm
 
-        self.estado_sensor_lineal = tk.Frame(self.raiz,bg="white", highlightbackground="black", highlightthickness=2)
-        self.estado_sensor_lineal.place(x = 1000, y = 250, width=300, height=50)
-        self.texto_estado_sensor_lineal = tk.Label(self.estado_sensor_lineal, text="ESTADO DEL  SENSOR ", font=("Arial", 14, "bold"), fg="black", bg="white" )
-        self.texto_estado_sensor_lineal.place(x = 40, y = 10)
-        self.valor_estado_sensor_lin = tk.Frame(self.raiz,bg="white", highlightbackground="black", highlightthickness=2)
-        self.valor_estado_sensor_lin.place(x = 1000, y = 300, width=300, height=50)
+       # self.estado_sensor_lineal = tk.Frame(self.raiz,bg="white", highlightbackground="black", highlightthickness=2)
+       # self.estado_sensor_lineal.place(x = 1000, y = 250, width=300, height=50)
+      #  self.texto_estado_sensor_lineal = tk.Label(self.estado_sensor_lineal, text="ESTADO DEL  SENSOR ", font=("Arial", 14, "bold"), fg="black", bg="white" )
+      #  self.texto_estado_sensor_lineal.place(x = 40, y = 10)
+      #  self.valor_estado_sensor_lin = tk.Frame(self.raiz,bg="white", highlightbackground="black", highlightthickness=2)
+      #  self.valor_estado_sensor_lin.place(x = 1000, y = 300, width=300, height=50)
         #aqui se va a introduccir el estado del sensor
+
+        self.sensor_distancia_lineal = tk.Frame(self.raiz, bg="white", highlightbackground="black", highlightthickness=2)
+        self.sensor_distancia_lineal.place(x = 950, y = 50, width = 200 , height = 75)
+        self.sensor_lineal = tk.Label(self.sensor_distancia_lineal,  text="SENSOR DE DISTANCIA \n LINEAL ", font=("Arial", 10, "bold"), fg="black", bg="white")
+        self.sensor_lineal.place(x = 20 , y =10)
+
+        self.texto_distancia_lineal =tk.Frame(self.raiz,bg="white", highlightbackground="black", highlightthickness=2)
+        self.texto_distancia_lineal.place(x = 950 , y = 120, width = 200 , height = 50)
+        self.textdis = tk.Label(self.texto_distancia_lineal, text="DISTANCIA ", font=("Arial", 10, "bold"), fg="black", bg="white")
+        self.textdis.place(x = 50 , y = 10)
+        self.valor_sensor_lineal = tk.Frame(self.raiz, bg="white", highlightbackground="black", highlightthickness=2)
+        self.valor_sensor_lineal.place(x = 950, y = 170, width=200, height=100)
+        self.texto_valor_sensor_lineal = tk.Label(self.valor_sensor_lineal, text="15 mm ", font=("Arial",24 , "bold"), fg="black", bg="white" )
+        self.texto_valor_sensor_lineal.place(x=50 , y=20)
+        
+        self.estado_sensor_lineal = tk.Frame(self.raiz,bg="white", highlightbackground="black", highlightthickness=2)
+        self.estado_sensor_lineal.place(x = 950, y = 250, width=200, height=50)
+        self.texto_estado_sensor_lineal = tk.Label(self.estado_sensor_lineal, text="ESTADO DEL  SENSOR ", font=("Arial", 10, "bold"), fg="black", bg="white" )
+        self.texto_estado_sensor_lineal.place(x = 20, y = 10)
+        self.valor_estado_sensor_lin = tk.Frame(self.raiz,bg="white", highlightbackground="black", highlightthickness=2)
+        self.valor_estado_sensor_lin.place(x = 950, y = 300, width=200, height=50)
+        self.texto_valor_estado_sensor_lin =tk.Label(self.valor_estado_sensor_lin, text="BUENO ", font=("Arial", 16, "bold"), fg="black", bg="white")
+        self.texto_valor_estado_sensor_lin.place(x=55 , y=10)
+        #################################################################################################################################
+        ###################################################################################################################################
+        self.sensor_distancia_lineal2 = tk.Frame(self.raiz, bg="white", highlightbackground="black", highlightthickness=2)
+        self.sensor_distancia_lineal2.place(x = 1150, y = 50, width = 200 , height = 75)
+        self.sensor_lineal2 = tk.Label(self.sensor_distancia_lineal2,  text="SENSOR DE DISTANCIA \n LINEAL 2 ", font=("Arial", 10, "bold"), fg="black", bg="white")
+        self.sensor_lineal2.place(x = 20 , y =10)
+        
+        self.texto_distancia_lineal2 =tk.Frame(self.raiz,bg="white", highlightbackground="black", highlightthickness=2)
+        self.texto_distancia_lineal2.place(x = 1150 , y = 120, width = 200 , height = 50)
+        self.textdis2 = tk.Label(self.texto_distancia_lineal2, text="DISTANCIA ", font=("Arial", 10, "bold"), fg="black", bg="white")
+        self.textdis2.place(x = 50 , y = 10)
+        self.valor_sensor_lineal2 = tk.Frame(self.raiz, bg="white", highlightbackground="black", highlightthickness=2)
+        self.valor_sensor_lineal2.place(x = 1150, y = 170, width=200, height=100)
+        self.texto_valor_sensor_lineal2 =tk.Label(self.valor_sensor_lineal2,text="10 mm ", font=("Arial",24 , "bold"), fg="black", bg="white")
+        self.texto_valor_sensor_lineal2.place(x=50 , y=20)
+                
+        self.estado_sensor_lineal2 = tk.Frame(self.raiz,bg="white", highlightbackground="black", highlightthickness=2)
+        self.estado_sensor_lineal2.place(x = 1150, y = 250, width=200, height=50)
+        self.texto_estado_sensor_lineal2 = tk.Label(self.estado_sensor_lineal2, text="ESTADO DEL  SENSOR ", font=("Arial", 10, "bold"), fg="black", bg="white" )
+        self.texto_estado_sensor_lineal2.place(x = 20, y = 10)
+        self.valor_estado_sensor_lin2 = tk.Frame(self.raiz,bg="white", highlightbackground="black", highlightthickness=2)
+        self.valor_estado_sensor_lin2.place(x = 1150, y = 300, width=200, height=50)
+        self.texto_valor_estado_sensor_lin2 =tk.Label(self.valor_estado_sensor_lin2,text="BUENO ", font=("Arial", 16, "bold"), fg="black", bg="white")
+        self.texto_valor_estado_sensor_lin2.place(x= 55 , y=10)
 
         self.sensor_distancia_angular =tk.Frame(self.raiz,bg="white", highlightbackground="black", highlightthickness=2)
         self.sensor_distancia_angular.place(x = 1000, y = 400, width = 300 , height = 75)
@@ -455,7 +508,8 @@ class panel_de_control:
 
         self.valor_grados_angulares = tk.Frame(self.raiz, bg="white", highlightbackground="black", highlightthickness=2)
         self.valor_grados_angulares.place(x = 1000, y = 520, width = 300 , height = 100)
-        #aqui se va a ingresar el valor de los grados angulares
+        self.texto_valor_grados_angulares = tk.Label(self.valor_grados_angulares, text="40° ", font=("Arial", 40, "bold"), fg="black", bg="white")
+        self.texto_valor_grados_angulares.place(x= 100, y=10)
 
         self.estado_del_sensor_angular = tk.Frame(self.raiz, bg="white", highlightbackground="black", highlightthickness=2)
         self.estado_del_sensor_angular.place(x = 1000, y = 600, width = 300 , height = 50)
@@ -464,7 +518,8 @@ class panel_de_control:
 
         self.valor_estado_sensoran = tk.Frame(self.raiz, bg="white", highlightbackground="black", highlightthickness=2)
         self.valor_estado_sensoran.place(x = 1000, y = 650, width=300, height=50)
-        # aqui se va a ingresar el estado del sensor angular
+        self.texto_valor_estado_sensoran = tk.Label(self.valor_estado_sensoran, text="BUENO", font=("Arial", 20, "bold"), fg="black", bg="white" )
+        self.texto_valor_estado_sensoran.place(x=100 , y=5)
 
         self.volver_menu_principal = tk.Button(self.raiz, text = "Regresar",font = ("Arial 16"), padx = 30, pady= 10, command= self.regresar)
         self.volver_menu_principal.place(x = 1000 , y = 740)
@@ -482,11 +537,6 @@ class panel_de_control:
         self.raiz.destroy() # Destruye la ventana de coordenadas
         self.ventana_origen.deiconify() # Vuelve a hacer visible la ventana principal
         
-
-
-
-
-
 
 
 
