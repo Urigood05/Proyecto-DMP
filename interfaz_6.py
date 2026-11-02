@@ -319,7 +319,7 @@ class ventana_modo_triangular:  # ventana donde se escribe la hipotenusa y el an
             hip = float(texto_hip)  # hipotenusa como numero con decimales
             ang = float(texto_ang)  # angulo como numero con decimales
             
-            # Fórmulas trigonométricas (convertimos a radianes primero)
+            # Fórmulas trigonométricas primero convertimos a radianes primero
             ang_rad = math.radians(ang)  # convierte el angulo de grados a radianes
             val_x = hip * math.cos(ang_rad)  # lado adyacente: hipotenusa por coseno del angulo
             val_y = hip * math.sin(ang_rad)  # lado opuesto: hipotenusa por seno del angulo
@@ -409,7 +409,7 @@ class ventana_modo_triangular:  # ventana donde se escribe la hipotenusa y el an
             y_mm = int(self.desplazamiento_en_y.get() or 0)   # desplazamiento en y ya calculado (mm del motor 2)
             self.raiz.withdraw()  # oculta la ventana del modo triangular
             ventana_panel = tk.Toplevel(self.raiz)  # crea la ventana del panel
-            panel_de_control(ventana_panel, self.raiz, x_mm, y_mm)   # abre el panel pasandole solo los mm de X y de Y (la hipotenusa y el angulo ya no se envian)
+            panel_de_control(ventana_panel, self.raiz, x_mm, y_mm)   # abre el panel pasandole solo los mm de X y de Y, la hipotenusa y el angulo ya no se envian
     
      # me falta ajustar que nomas se ingresen nuneros en la hipotenusa pero no conosco su valor maximo mejor despues de lo pongo        
         
@@ -432,7 +432,7 @@ class panel_de_control:  # ventana del panel: muestra los datos de los 2 motores
         #self.tabla_panel.heading("col1", text = "Motor de desplazamiento angular", anchor = "center")
         #self.tabla_panel.place( x= 100 , y = 150, width= 800 , height= 500)
 
-        # ---------- COLUMNA IZQUIERDA: MOTOR 1 (desplazamiento lineal X) ----------
+        #  COLUMNA IZQUIERDA: motor 1, desplazamiento lineal X
         self.celda_motor_lineal = tk.Frame(self.raiz, bg="white", highlightbackground="black", highlightthickness=2)  # cuadro del titulo "desplazamiento lineal"
         self.celda_motor_lineal.place(x=100, y=100, width=400, height=50)  # posicion y tamaño del cuadro
         self.texto_motor_lineal = tk.Label(self.celda_motor_lineal, text=" DESPLAZAMIENTO LINEAL X", font=("Arial", 16, "bold"), fg="blue", bg="white")  # titulo del cuadro
@@ -463,7 +463,7 @@ class panel_de_control:  # ventana del panel: muestra los datos de los 2 motores
         self.texto_valor_pasos_ml = tk.Label(self.valor_pasos_ml,text=" 10 pasos", font=("Arial", 40, "bold"), fg="green", bg="white")  # texto de pasos (luego se actualiza)
         self.texto_valor_pasos_ml.place(relx=0.5, rely=0.5, anchor="center")  # lo centra dentro del cuadro
 
-        # ---------- COLUMNA DERECHA: MOTOR 2 (desplazamiento angular) ----------
+        #  COLUMNA DERECHA: motor 2, desplazamiento angular
         self.celda_motor_angular = tk.Frame(self.raiz, bg="white", highlightbackground="black", highlightthickness=2)  # cuadro del titulo "desplazamiento angular"
         self.celda_motor_angular.place(x = 500, y = 100, width = 400 , height = 50)  # posicion y tamaño del cuadro
         self.texto_motor_angular = tk.Label(self.celda_motor_angular, text=" DESPLAZAMIENTO ANGULAR ", font=("Arial", 16, "bold"), fg="blue", bg="white" )  # titulo del cuadro
@@ -515,7 +515,7 @@ class panel_de_control:  # ventana del panel: muestra los datos de los 2 motores
       #  self.valor_estado_sensor_lin.place(x = 1000, y = 300, width=300, height=50)
         #aqui se va a introduccir el estado del sensor
 
-        # ---------- SENSOR DE DISTANCIA LINEAL 1 (por ahora con valores de ejemplo) ----------
+        # sensor de distancia lineal 1
         self.sensor_distancia_lineal = tk.Frame(self.raiz, bg="white", highlightbackground="black", highlightthickness=2)  # cuadro del titulo del sensor 1
         self.sensor_distancia_lineal.place(x = 950, y = 50, width = 200 , height = 75)  # posicion y tamaño del cuadro
         self.sensor_lineal = tk.Label(self.sensor_distancia_lineal,  text="SENSOR DE DISTANCIA \n LINEAL ", font=("Arial", 10, "bold"), fg="black", bg="white")  # titulo del sensor 1
@@ -540,7 +540,7 @@ class panel_de_control:  # ventana del panel: muestra los datos de los 2 motores
         self.texto_valor_estado_sensor_lin.place(relx=0.5, rely=0.5, anchor="center")  # lo centra dentro del cuadro
         #################################################################################################################################
         ###################################################################################################################################
-        # ---------- SENSOR DE DISTANCIA LINEAL 2 (por ahora con valores de ejemplo) ----------
+        # sensor de distancia lineal 2
         self.sensor_distancia_lineal2 = tk.Frame(self.raiz, bg="white", highlightbackground="black", highlightthickness=2)  # cuadro del titulo del sensor 2
         self.sensor_distancia_lineal2.place(x = 1150, y = 50, width = 200 , height = 75)  # posicion y tamaño del cuadro
         self.sensor_lineal2 = tk.Label(self.sensor_distancia_lineal2,  text="SENSOR DE DISTANCIA \n LINEAL 2 ", font=("Arial", 10, "bold"), fg="black", bg="white")  # titulo del sensor 2
@@ -564,7 +564,7 @@ class panel_de_control:  # ventana del panel: muestra los datos de los 2 motores
         self.texto_valor_estado_sensor_lin2 =tk.Label(self.valor_estado_sensor_lin2,text="BUENO ", font=("Arial", 16, "bold"), fg="black", bg="white")  # estado de ejemplo del sensor 2
         self.texto_valor_estado_sensor_lin2.place(relx=0.5, rely=0.5, anchor="center")  # lo centra dentro del cuadro
 
-        # ---------- SENSOR DE DISTANCIA ANGULAR (por ahora con valores de ejemplo) ----------
+        # sensor de distancia angular
         self.sensor_distancia_angular =tk.Frame(self.raiz,bg="white", highlightbackground="black", highlightthickness=2)  # cuadro del titulo del sensor angular
         self.sensor_distancia_angular.place(x = 1000, y = 400, width = 300 , height = 75)  # posicion y tamaño del cuadro
         self.sensortexto_distancia_angular = tk.Label(self.sensor_distancia_angular,  text="SENSOR DE DISTANCIA \n ANGULAR ", font=("Arial", 14, "bold"), fg="black", bg="white")  # titulo del sensor angular
@@ -590,7 +590,7 @@ class panel_de_control:  # ventana del panel: muestra los datos de los 2 motores
         self.texto_valor_estado_sensoran = tk.Label(self.valor_estado_sensoran, text="BUENO", font=("Arial", 20, "bold"), fg="black", bg="white" )  # estado de ejemplo del sensor angular
         self.texto_valor_estado_sensoran.place(relx=0.5, rely=0.5, anchor="center")  # lo centra dentro del cuadro
 
-        # ---------- BOTONES ----------
+        #  BOTONES 
         self.volver_menu_principal = tk.Button(self.raiz, text = "Regresar",font = ("Arial 16"), padx = 30, pady= 10, command= self.regresar)  # boton para salir del panel
         self.volver_menu_principal.place(x = 1000 , y = 740)  # posicion del boton regresar
         self.volver_menu_principal.config(bd = 20)  # grosor del borde del boton
@@ -623,11 +623,11 @@ class panel_de_control:  # ventana del panel: muestra los datos de los 2 motores
         self.revisar_motor()   # empieza a leer el avance de la placa
 
     def mostrar_valores(self, pasos_x, pasos_y):   # actualiza los 6 cuadros a partir de los pasos que lleva cada motor
-        rev_x = pasos_x / PASOS_POR_REV   # motor 1: pasos -> revoluciones del motor
-        mm_x = pasos_x / PASOS_POR_MM_X   # motor 1: pasos -> mm recorridos en X
-        rev_y = pasos_y / PASOS_POR_REV   # motor 2: pasos -> revoluciones del motor
-        mm_y = pasos_y / PASOS_POR_MM_Y   # motor 2: pasos -> mm recorridos en Y
-        grados = mm_y * GRADOS_POR_MM     # mm de Y -> grados (solo para mostrar, el AS5600 no interviene)
+        rev_x = pasos_x / PASOS_POR_REV # motor 1: pasos -> revoluciones del motor
+        mm_x = pasos_x / PASOS_POR_MM_X # motor 1: pasos -> mm recorridos en X
+        rev_y = pasos_y / PASOS_POR_REV # motor 2: pasos -> revoluciones del motor
+        mm_y = pasos_y / PASOS_POR_MM_Y # motor 2: pasos -> mm recorridos en Y
+        grados = mm_y * GRADOS_POR_MM  # mm de Y -> grados (solo para mostrar, el AS5600 no interviene)
 
         self.texto_valor_motor_lineal.config(text=f"{mm_x:.1f} mm")   # muestra el desplazamiento lineal con 1 decimal
         self.texto_valor_revolucion_ml.config(text=f"{rev_x:.3f} rev")   # muestra las revoluciones del motor 1 con 3 decimales
